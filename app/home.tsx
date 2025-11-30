@@ -1,4 +1,5 @@
-import { Image, ImageBackground, Text, View } from "react-native";
+import CafeShops from "@/components/cafeshops";
+import { ImageBackground, Text, View } from "react-native";
 
 export default function Home() {
   return (
@@ -21,27 +22,13 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            <View style={{ width: 45 }}>
-              <Text
-                onPress={() => console.log("clicked")}
-                style={{ fontSize: 12, fontFamily: "Galmuri9" }}
-              >
-                • • •
-              </Text>
-            </View>
-
             <View style={{ flex: 1, alignItems: "center" }}>
               <Text style={{ fontSize: 16, fontFamily: "Galmuri9" }}>
                 TAKE BOOK OUT→
               </Text>
             </View>
-
-            <View style={{ width: 45 }} />
           </View>
-          <Image
-            source={require("../assets/images/BG-grass.png")}
-            style={{ width: "100%" }}
-          />
+          <CafeShops />
         </ImageBackground>
       </View>
 

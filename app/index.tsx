@@ -26,7 +26,10 @@ export default function HomeScreen() {
       {/* Landing 오버레이 */}
       {showLanding && (
         <Animated.View
-          style={[StyleSheet.absoluteFill, { transform: [{ translateX }] }]}
+          style={[
+            StyleSheet.absoluteFill,
+            { transform: [{ translateX }], zIndex: 999, elevation: 999 },
+          ]}
         >
           <Landing onPress={handleLandingPress} />
         </Animated.View>
