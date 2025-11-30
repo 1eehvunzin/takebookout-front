@@ -11,33 +11,30 @@ export default function Landing({ onPress }: LandingProps) {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        width: "100vw",
-        height: "100vh",
+        flex: 1,
         backgroundColor: "black",
-        padding: "24px",
+        padding: 24,
       }}
     >
       <Text
         style={{
           width: "100%",
           textAlign: "left",
-          fontSize: "100px",
+          fontSize: 100,
           color: "white",
           fontFamily: "Galmuri9",
         }}
       >
         TAKE
       </Text>
-      <Text
-        style={{ color: "white", fontSize: "100px", fontFamily: "Galmuri9" }}
-      >
+      <Text style={{ color: "white", fontSize: 100, fontFamily: "Galmuri9" }}>
         BOOK
       </Text>
       <Text
         style={{
           width: "100%",
           textAlign: "right",
-          fontSize: "100px",
+          fontSize: 100,
           color: "white",
           fontFamily: "Galmuri9",
         }}

@@ -1,14 +1,43 @@
-import { Image, ImageBackground, View } from "react-native";
+import { Image, ImageBackground, Text, View } from "react-native";
 
 export default function Home() {
   return (
-    <View style={{ height: "100vh", width: "100vw" }}>
+    <View style={{ flex: 1 }}>
       <View style={{ height: "40%", width: "100%" }}>
         <ImageBackground
           source={require("../assets/images/BG-sky.png")}
-          style={{ height: "100%", width: "100%", justifyContent: "flex-end" }}
+          style={{
+            height: "100%",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
           resizeMode="cover"
         >
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 60,
+              paddingHorizontal: 20,
+              alignItems: "center",
+            }}
+          >
+            <View style={{ width: 45 }}>
+              <Text
+                onPress={() => console.log("clicked")}
+                style={{ fontSize: 12, fontFamily: "Galmuri9" }}
+              >
+                • • •
+              </Text>
+            </View>
+
+            <View style={{ flex: 1, alignItems: "center" }}>
+              <Text style={{ fontSize: 16, fontFamily: "Galmuri9" }}>
+                TAKE BOOK OUT→
+              </Text>
+            </View>
+
+            <View style={{ width: 45 }} />
+          </View>
           <Image
             source={require("../assets/images/BG-grass.png")}
             style={{ width: "100%" }}
