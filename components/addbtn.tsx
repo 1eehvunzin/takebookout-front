@@ -1,8 +1,8 @@
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 
-export default function AddBtn() {
+export default function AddBtn({ onPress }: AddBtnProps) {
   return (
-    <View style={{ alignItems: "center" }}>
+    <TouchableOpacity onPress={onPress} style={{ alignItems: "center" }}>
       <Image
         source={require("../assets/images/add.png")}
         style={{
@@ -14,6 +14,6 @@ export default function AddBtn() {
           left: 1,
         }}
       ></Image>
-    </View>
+    </TouchableOpacity>
   );
 }
