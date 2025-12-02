@@ -3,7 +3,40 @@
     {
       "id": 1,
       "name": "김이화의 서재",
-      "imageIndex": 0
+      "imageIndex": 0,
+      "books": [
+        {
+          "id": 1,
+          "name": "유괴의 날"
+        },
+        {
+          "id": 2,
+          "name": "어린 왕자"
+        },
+        {
+          "id": 3,
+          "name": "교토의 디테일"
+        },
+        {
+          "id": 4,
+          "name": "데미안"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "JaneDoe의 서재",
+      "imageIndex": 1,
+      "books": [
+        {
+          "id": 1,
+          "name": "과학 잔혹사"
+        },
+        {
+          "id": 2,
+          "name": "인간 실격"
+        }
+      ]
     }
   ]
 }

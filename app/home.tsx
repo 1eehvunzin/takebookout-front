@@ -1,3 +1,4 @@
+import Books from "@/components/books";
 import CafeShops from "@/components/cafeshops";
 import NameInput from "@/components/nameinput";
 import { useState } from "react";
@@ -95,9 +96,11 @@ export default function Home() {
       <View style={{ height: "60%", backgroundColor: "brown" }}>
         <ImageBackground
           source={require("../assets/images/BG-wood.png")}
-          style={{ height: "100%", width: "100%" }}
+          style={{ height: "100%", width: "100%", alignItems: "center" }}
           resizeMode="cover"
-        ></ImageBackground>
+        >
+          <Books />
+        </ImageBackground>
       </View>
     </View>
   );
