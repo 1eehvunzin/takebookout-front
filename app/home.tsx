@@ -18,6 +18,9 @@ export default function Home() {
       image: images[i % images.length], //초기 데이터도 이미지 지정
     }))
   );
+
+  const [currentShopId, setCurrentShopId] = useState(shops[0]?.id ?? null);
+
   const [isNameInputVisible, setIsNameInputVisible] = useState(false);
   const [newName, setNewName] = useState("");
 
@@ -42,6 +45,7 @@ export default function Home() {
           id: Date.now(),
           name: trimmed,
           image: randomImage,
+          books: [],
         },
       ];
     });
@@ -49,6 +53,10 @@ export default function Home() {
     setNewName("");
     setIsNameInputVisible(false);
     Keyboard.dismiss();
+  };
+
+  const handleSelectShop = (shopId: number) => {
+    setCurrentShopId(shopId);
   };
 
   return (
@@ -89,7 +97,12 @@ export default function Home() {
               />
             </View>
           </View>
-          <CafeShops shops={shops} onPressAdd={handleNameInput} />
+          <CafeShops
+            shops={shops}
+            onPressAdd={handleNameInput}
+            onPressShop={handleSelectShop}
+            currentShopId={currentShopId}
+          />
         </ImageBackground>
       </View>
 
@@ -99,7 +112,11 @@ export default function Home() {
           style={{ height: "100%", width: "100%", alignItems: "center" }}
           resizeMode="cover"
         >
-          <Books />
+          <Books
+            shops={shops}
+            currentShopId={currentShopId}
+            onChangeShops={setShops}
+          />
         </ImageBackground>
       </View>
     </View>

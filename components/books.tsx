@@ -1,14 +1,27 @@
 import Book from "@/components/book";
 import { useState } from "react";
 import { Image, View } from "react-native";
-import mockDB from "../assets/data/mock-db.json";
+//import mockDB from "../assets/data/mock-db.json";
 import BookAddBtn from "./bookaddbtn";
 import NameInput from "./nameinput";
+
+type BookItem = { id: number; name: string };
+type Shop = {
+  id: number;
+  name: string;
+  books: BookItem[];
+};
 
 type ShelfProps = {
   books: { id: number; name: string }[];
   showAddBtn: boolean;
   onPressAdd?: () => void;
+};
+
+type BooksProps = {
+  shops: Shop[];
+  currentShopId: number;
+  onChangeShops: (shops: Shop[]) => void;
 };
 
 function Shelf({ books, showAddBtn, onPressAdd }: ShelfProps) {
@@ -39,10 +52,11 @@ function Shelf({ books, showAddBtn, onPressAdd }: ShelfProps) {
   );
 }
 
-export default function Books() {
-  const [shops, setShops] = useState(mockDB.shops);
-  const [currentShopId, setCurrentShopId] = useState(1); // 지금은 1로 하드코딩
-
+export default function Books({
+  shops,
+  currentShopId,
+  onChangeShops,
+}: BooksProps) {
   const [showInput, setShowInput] = useState(false);
   const [newBookName, setNewBookName] = useState("");
 

@@ -1,8 +1,20 @@
-import { Image, ScrollView, View } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import AddBtn from "./addbtn";
 import CafeShop from "./cafeshop";
 
-export default function CafeShops({ shops, onPressAdd }) {
+type CafeShopsProps = {
+  shops: { id: number; name: string; image: any }[];
+  onPressAdd: () => void;
+  onPressShop: (id: number) => void;
+  currentShopId: number | null;
+};
+
+export default function CafeShops({
+  shops,
+  onPressAdd,
+  onPressShop,
+  currentShopId,
+}: CafeShopsProps) {
   return (
     <View
       style={{ flex: 1, justifyContent: "flex-end", alignItems: "flex-start" }}
@@ -26,11 +38,34 @@ export default function CafeShops({ shops, onPressAdd }) {
           paddingRight: 100,
         }}
       >
-        {shops.map((item) => (
-          <View key={item.id} style={{ marginRight: 45 }}>
-            <CafeShop name={item.name} src={item.image} />
-          </View>
-        ))}
+        {shops.map((item) => {
+          const isSelected = item.id === currentShopId;
+
+          return (
+            <TouchableOpacity
+              key={item.id}
+              onPress={() => onPressShop(item.id)}
+              style={{
+                marginRight: 45,
+                alignItems: "center",
+              }}
+              activeOpacity={0.8}
+            >
+              {isSelected && (
+                <Image
+                  source={require("../assets/images/highlight.png")}
+                  style={{
+                    position: "absolute",
+                    top: -220,
+                    zIndex: 10,
+                    resizeMode: "contain",
+                  }}
+                />
+              )}
+              <CafeShop name={item.name} src={item.image} />
+            </TouchableOpacity>
+          );
+        })}
 
         <AddBtn onPress={onPressAdd} />
       </ScrollView>
