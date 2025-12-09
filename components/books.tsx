@@ -87,7 +87,7 @@ export default function Books({
     const trimmed = newBookName.trim();
     if (!trimmed) return;
 
-    setShops((prev) =>
+    onChangeShops((prev) =>
       prev.map((shop) => {
         if (shop.id !== currentShopId) return shop;
 
