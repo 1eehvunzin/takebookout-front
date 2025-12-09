@@ -1,4 +1,5 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
+import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -12,6 +13,7 @@ import {
 export default function BookScan() {
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView | null>(null);
+  const router = useRouter();
 
   const [isCapturing, setIsCapturing] = useState(false);
   const [photoUri, setPhotoUri] = useState<string | null>(null);
@@ -36,7 +38,7 @@ export default function BookScan() {
     return (
       <View style={styles.center}>
         <Text style={styles.infoText}>
-          문서를 스캔하려면 카메라 권한이 필요합니다.
+          문서를 찍으려면 카메라 권한이 필요합니다.
         </Text>
         <TouchableOpacity
           style={styles.permissionButton}
@@ -66,13 +68,17 @@ export default function BookScan() {
     }
   };
 
+  const handleDone = () => {
+    router.back();
+  };
+
   return (
     <View style={styles.container}>
       {/* 상단 안내 */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>문서 스캔</Text>
         <Text style={styles.headerSubtitle}>
-          문서를 가이드 박스 안에 맞춰주세요
+          자유롭게 문서를 화면에 맞춰 촬영하세요
         </Text>
       </View>
 
@@ -83,17 +89,6 @@ export default function BookScan() {
           style={StyleSheet.absoluteFill}
           facing="back"
         />
-
-        {/* 가운데 가이드 박스 (아이폰 메모 느낌) */}
-        <View style={styles.overlay}>
-          <View style={styles.mask} />
-          <View style={styles.rowCenter}>
-            <View style={styles.mask} />
-            <View style={styles.guideBox} />
-            <View style={styles.mask} />
-          </View>
-          <View style={styles.mask} />
-        </View>
       </View>
 
       {/* 하단 버튼 영역 */}
@@ -109,9 +104,14 @@ export default function BookScan() {
             <Text style={styles.captureText}>스캔</Text>
           )}
         </TouchableOpacity>
+
+        {photoUri && (
+          <TouchableOpacity style={styles.doneButton} onPress={handleDone}>
+            <Text style={styles.doneButtonText}>스캔 완료</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
-      {/* 스캔 결과 미리보기 */}
       {photoUri && (
         <View style={styles.previewContainer}>
           <Text style={styles.previewTitle}>스캔된 문서 미리보기</Text>
@@ -123,10 +123,7 @@ export default function BookScan() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-  },
+  container: { flex: 1, backgroundColor: "black" },
   header: {
     paddingTop: 60,
     paddingHorizontal: 20,
@@ -137,41 +134,23 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 4,
+    fontFamily: "Galmuri9", // ← 적용
   },
   headerSubtitle: {
     color: "#aaaaaa",
     fontSize: 13,
+    marginTop: 4,
+    fontFamily: "Galmuri9", // ← 적용
   },
-  cameraContainer: {
-    flex: 1,
-    position: "relative",
-    overflow: "hidden",
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "space-between",
-  },
-  mask: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
-  },
-  rowCenter: {
-    flexDirection: "row",
-    flex: 2,
-  },
-  guideBox: {
-    flex: 6,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: "#00ffcc",
-    backgroundColor: "transparent",
-  },
+  cameraContainer: { flex: 1, position: "relative", overflow: "hidden" },
+
   bottomArea: {
     paddingVertical: 16,
     alignItems: "center",
     backgroundColor: "black",
+    gap: 12,
   },
+
   captureButton: {
     width: 90,
     height: 90,
@@ -186,18 +165,36 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#222",
+    fontFamily: "Galmuri9", // ← 적용
   },
+
+  doneButton: {
+    marginTop: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    backgroundColor: "#00cc88",
+    borderRadius: 8,
+  },
+  doneButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    fontFamily: "Galmuri9", // ← 적용
+  },
+
   previewContainer: {
     position: "absolute",
     right: 12,
-    bottom: 120,
+    bottom: 180,
     alignItems: "flex-end",
   },
   previewTitle: {
     color: "white",
     fontSize: 12,
     marginBottom: 4,
+    fontFamily: "Galmuri9", // ← 적용
   },
+
   previewImage: {
     width: 90,
     height: 120,
@@ -205,6 +202,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
   },
+
   center: {
     flex: 1,
     alignItems: "center",
@@ -216,6 +214,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     marginTop: 12,
+    fontFamily: "Galmuri9", // ← 적용
   },
   permissionButton: {
     marginTop: 16,
@@ -227,5 +226,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: "bold",
     color: "black",
+    fontFamily: "Galmuri9", // ← 적용
   },
 });
