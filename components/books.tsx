@@ -2,6 +2,7 @@ import Book from "@/components/book";
 import { useState } from "react";
 import { Image, View } from "react-native";
 //import mockDB from "../assets/data/mock-db.json";
+import { useRouter } from "expo-router";
 import BookAddBtn from "./bookaddbtn";
 import NameInput from "./nameinput";
 
@@ -25,6 +26,8 @@ type BooksProps = {
 };
 
 function Shelf({ books, showAddBtn, onPressAdd }: ShelfProps) {
+  const router = useRouter();
+
   return (
     <View style={{ position: "relative", alignItems: "center", height: 165 }}>
       <Image
@@ -43,9 +46,12 @@ function Shelf({ books, showAddBtn, onPressAdd }: ShelfProps) {
         }}
       >
         {books.map((book) => (
-          <Book key={book.id} name={book.name} />
+          <Book
+            key={book.id}
+            name={book.name}
+            onPress={() => router.push("/bookscan")}
+          />
         ))}
-
         {showAddBtn && onPressAdd && <BookAddBtn onPress={onPressAdd} />}
       </View>
     </View>
