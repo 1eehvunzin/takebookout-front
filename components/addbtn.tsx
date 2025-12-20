@@ -1,8 +1,16 @@
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, ViewStyle } from "react-native";
 
-export default function AddBtn({ onPress }: AddBtnProps) {
+type AddBtnProps = {
+  onPress?: () => void;
+  style?: ViewStyle;
+};
+
+export default function AddBtn({ onPress, style }: AddBtnProps) {
   return (
-    <TouchableOpacity onPress={onPress} style={{ alignItems: "center" }}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[{ alignItems: "center" }, style]}
+    >
       <Image
         source={require("../assets/images/add.png")}
         style={{

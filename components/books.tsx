@@ -49,7 +49,15 @@ function Shelf({ books, showAddBtn, onPressAdd }: ShelfProps) {
           <Book
             key={book.id}
             name={book.name}
-            onPress={() => router.push("/bookscan")}
+            onPress={() =>
+              router.push({
+                pathname: "/bookdetail",
+                params: {
+                  bookName: book.name,
+                  bookId: book.id,
+                },
+              })
+            }
           />
         ))}
         {showAddBtn && onPressAdd && <BookAddBtn onPress={onPressAdd} />}
